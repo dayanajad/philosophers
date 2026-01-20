@@ -6,7 +6,7 @@
 /*   By: dbinti-m <dbinti-m@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 18:07:38 by dbinti-m          #+#    #+#             */
-/*   Updated: 2026/01/17 18:35:31 by dbinti-m         ###   ########.fr       */
+/*   Updated: 2026/01/17 20:12:47 by dbinti-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	*routine(void *arg)
 		if (philo->data->num_philo % 2 == 0 && window >= 10
 			&& philo->id % 2 == 0)
 			usleep(500);
-		else if (philo->data->num_philo % 2 != 0 && window >= 200
+		else if (philo->data->num_philo % 2 != 0 && window >= 210
 			&& philo->id % 2 == 0)
 			usleep(500);
 	}
