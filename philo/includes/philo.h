@@ -66,4 +66,10 @@ void		monitor(t_philo *philos, t_data *data);
 
 void		*routine(void *arg);
 
+// srcs/actions.c
+
+void		philo_eat(t_philo *philo);
+void		philo_sleep(t_philo *philo);
+void		philo_think(t_philo *philo);
+
 #endif

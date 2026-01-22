@@ -52,6 +52,19 @@ static void	set_dead(t_data *data)
 	pthread_mutex_unlock(&data->dead_lock);
 }
 
+static void	announce_death(t_philo *philo, t_data *data)
+{
+	pthread_mutex_lock(&data->dead_lock);
+	if (!data->dead)
+	{
+		data->dead = 1;
+		pthread_mutex_lock(&data->print_lock);
+		printf("%lld %d died\n", get_time() - data->start_time, philo->id);
+		pthread_mutex_unlock(&data->print_lock);
+	}
+	pthread_mutex_unlock(&data->dead_lock);
+}
+
 void	monitor(t_philo *philos, t_data *data)
 {
 	int	i;
@@ -63,16 +76,7 @@ void	monitor(t_philo *philos, t_data *data)
 		{
 			if (check_death(&philos[i]))
 			{
-				pthread_mutex_lock(&data->dead_lock);
-				if (!data->dead)
-				{
-					data->dead = 1;
-					pthread_mutex_lock(&data->print_lock);
-					printf("%lld %d died\n",
-						get_time() - data->start_time, philos[i].id);
-					pthread_mutex_unlock(&data->print_lock);
-				}
-				pthread_mutex_unlock(&data->dead_lock);
+				announce_death(&philos[i], data);
 				return ;
 			}
 			i++;
