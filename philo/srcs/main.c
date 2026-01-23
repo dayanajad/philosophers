@@ -36,16 +36,23 @@ static int	valid_args(int ac, char **av)
 	return (1);
 }
 
-static void	start_threads(t_philo *philos, t_data *data)
+static int	start_threads(t_philo *philos, t_data *data)
 {
 	int	i;
 
 	i = 0;
 	while (i < data->num_philo)
 	{
-		pthread_create(&philos[i].thread, NULL, routine, &philos[i]);
+		if (pthread_create(&philos[i].thread, NULL, routine, &philos[i]) != 0)
+		{
+			data->dead = 1;
+			while (--i >= 0)
+				pthread_join(philos[i].thread, NULL);
+			return (0);
+		}
 		i++;
 	}
+	return (1);
 }
 
 static void	join_threads(t_philo *philos, t_data *data)
@@ -88,7 +95,11 @@ int	main(int ac, char **av)
 		return (printf("Error: Init failed\n"), 1);
 	if (!init_philos(&philos, &data))
 		return (free(data.forks), printf("Error: Init failed\n"), 1);
-	start_threads(philos, &data);
+	if (!start_threads(philos, &data))
+	{
+		cleanup(philos, &data);
+		return (printf("Error: Thread creation failed\n"), 1);
+	}
 	monitor(philos, &data);
 	join_threads(philos, &data);
 	cleanup(philos, &data);

@@ -55,16 +55,14 @@ void	ft_usleep(long long time)
 void	print_message(t_philo *philo, char *msg)
 {
 	long long	time;
-	int			should_print;
 
 	pthread_mutex_lock(&philo->data->dead_lock);
-	should_print = !philo->data->dead;
-	pthread_mutex_unlock(&philo->data->dead_lock);
-	if (should_print)
+	if (!philo->data->dead)
 	{
 		pthread_mutex_lock(&philo->data->print_lock);
 		time = get_time() - philo->data->start_time;
 		printf("%lld %d %s\n", time, philo->id, msg);
 		pthread_mutex_unlock(&philo->data->print_lock);
 	}
+	pthread_mutex_unlock(&philo->data->dead_lock);
 }
