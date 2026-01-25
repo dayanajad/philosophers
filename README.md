@@ -32,7 +32,7 @@ Example :
 
 timestamp_ms philosopher id action
 
-*** RESOURCES ***
+## RESOURCES
 
 - [Philosophers 42 Guide— “The Dining Philosophers Problem”](https://medium.com/@ruinadd/philosophers-42-guide-the-dining-philosophers-problem-893a24bc0fe2)
 - [POSIX Threads Programming](https://hpc-tutorials.llnl.gov/posix/what_is_a_thread/)
