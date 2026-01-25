@@ -49,11 +49,8 @@ void	philo_think(t_philo *philo)
 	long long	think_time;
 
 	print_message(philo, "is thinking");
-	if (philo->data->num_philo % 2 != 0 && philo->data->num_philo <= 5)
-	{
-		think_time = (philo->data->time_to_die - philo->data->time_to_eat
-				- philo->data->time_to_sleep) / 2;
-		if (think_time > 0)
-			ft_usleep(think_time);
-	}
+	think_time = philo->data->time_to_die - philo->data->time_to_eat
+		- philo->data->time_to_sleep;
+	if (philo->data->num_philo % 2 != 0 && think_time > philo->data->time_to_eat)
+		ft_usleep(think_time / 2);
 }

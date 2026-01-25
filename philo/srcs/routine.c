@@ -26,29 +26,15 @@ static int	is_dead(t_philo *philo)
 
 static void	initial_stagger(t_philo *philo)
 {
-	int	window;
+	long long	margin;
 
-	if (philo->data->num_philo % 2 != 0 && philo->data->num_philo <= 5)
-	{
-		if (philo->id % 2 == 0)
-			ft_usleep(philo->data->time_to_eat);
-	}
-	else if (philo->data->num_philo <= 30)
-	{
-		if (philo->id % 2 == 0)
-			usleep(1000);
-	}
-	else
-	{
-		window = philo->data->time_to_die - philo->data->time_to_eat
-			- philo->data->time_to_sleep;
-		if (philo->data->num_philo % 2 == 0 && window >= 10
-			&& philo->id % 2 == 0)
-			usleep(500);
-		else if (philo->data->num_philo % 2 != 0 && window >= 210
-			&& philo->id % 2 == 0)
-			usleep(500);
-	}
+	margin = philo->data->time_to_die - philo->data->time_to_eat
+		- philo->data->time_to_sleep;
+	if (philo->data->num_philo % 2 == 0 && philo->id % 2 == 0)
+		usleep(1000);
+	else if (philo->data->num_philo % 2 != 0
+		&& margin > philo->data->time_to_eat && philo->id % 2 == 0)
+		ft_usleep(philo->data->time_to_eat);
 }
 
 void	*routine(void *arg)
