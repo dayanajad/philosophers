@@ -6,7 +6,7 @@
 /*   By: dbinti-m <dbinti-m@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 12:14:38 by dbinti-m          #+#    #+#             */
-/*   Updated: 2026/01/20 12:16:42 by dbinti-m         ###   ########.fr       */
+/*   Updated: 2026/01/26 12:40:38 by dbinti-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	philo_think(t_philo *philo)
 	print_message(philo, "is thinking");
 	think_time = philo->data->time_to_die - philo->data->time_to_eat
 		- philo->data->time_to_sleep;
-	if (philo->data->num_philo % 2 != 0 && think_time > philo->data->time_to_eat)
+	if (philo->data->num_philo % 2 != 0
+		&& think_time > philo->data->time_to_eat)
 		ft_usleep(think_time / 2);
 }
